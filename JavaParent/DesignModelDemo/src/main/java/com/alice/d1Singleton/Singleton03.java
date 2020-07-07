@@ -1,4 +1,4 @@
-package com.alice.singleton;
+package com.alice.d1Singleton;
 
 /**
  * 静态内部类

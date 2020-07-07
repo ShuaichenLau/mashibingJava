@@ -1,6 +1,4 @@
-package com.alice.singleton;
-
-import com.sun.org.apache.regexp.internal.REUtil;
+package com.alice.d1Singleton;
 
 /**
  * 枚举类实现
