@@ -1,4 +1,4 @@
-package com.alice.d1Singleton;
+package com.alice.d1_Singleton;
 
 /**
  * 懒汉式 单例模式
