@@ -11,7 +11,7 @@ package com.alice.d2_StrategyHomework;
  */
 public class HomeWorkMain {
     public static void main(String[] args) {
-
+        // 工厂模式...
         TankParent superTank = new SuperTank();
         superTank.fire();
 
