@@ -1,19 +1,22 @@
 package com.alice.other;
 
-
-import java.io.*;
-import java.util.jar.JarInputStream;
-import java.util.jar.Manifest;
+import com.alibaba.fastjson.JSONObject;
 import org.dom4j.Element;
 import org.dom4j.dom.DOMElement;
 import org.jsoup.Jsoup;
-import com.alibaba.fastjson.JSONObject;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.jar.JarInputStream;
+import java.util.jar.Manifest;
 
 /**
  * 传统项目转maven 生成pom 依赖jar
  */
 public class Print_jarTopom {
-    public static void main(String [] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         Element dependencys = new DOMElement("dependencys");
         File dir = new File("D:\\isoftstone\\dev_20200616\\branch_init\\rules_nvhl\\WebRoot\\WEB-INF\\lib"); //需生成pom.xml 文件的 lib路径
 
@@ -31,7 +34,7 @@ public class Print_jarTopom {
             StringBuffer sb = new StringBuffer(jar.getName());
             if (bundleName != null) {
                 bundleName = bundleName.toLowerCase().replace(" ", "-");
-                sb.append(bundleName+"\t").append(bundleVersion);
+                sb.append(bundleName + "\t").append(bundleVersion);
                 ele = getDependices(bundleName, bundleVersion);
  /* System.out.println(sb.toString());
  System.out.println(ele.asXML());*/
@@ -55,7 +58,7 @@ public class Print_jarTopom {
                 }
                 ele = getDependices(bundleName, bundleVersion);
                 sb.setLength(0);
-                sb.append(bundleName+"\t").append(bundleVersion);
+                sb.append(bundleName + "\t").append(bundleVersion);
                 /* System.out.println(sb.toString());*/
                 System.out.println(ele.asXML());
                 /* savepomFile(dependencys.asXML()+"\r\n");*/
@@ -72,6 +75,7 @@ public class Print_jarTopom {
         /* System.out.println(dependencys.asXML());*/
         savepomFile(dependencys.asXML());
     }
+
     private static void savepomFile(String asXML) {
         FileWriter fwriter;
         fwriter = null;
@@ -89,6 +93,7 @@ public class Print_jarTopom {
             }
         }
     }
+
     public static Element getDependices(String key, String ver) {
         Element dependency = new DOMElement("dependency");
         // 设置代理
