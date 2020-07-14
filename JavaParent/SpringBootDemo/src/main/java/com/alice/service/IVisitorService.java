@@ -19,5 +19,5 @@ public interface IVisitorService {
 
     Collection<VisitorEntity> findByAllVisitor();
 
-    Collection<VisitorEntity> findByCondition(Map<String, String> condition);
+    Collection<VisitorEntity> findByCondition(VisitorEntity visitorCondition);
 }

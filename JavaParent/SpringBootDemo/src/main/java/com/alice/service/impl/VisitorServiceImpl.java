@@ -1,6 +1,5 @@
 package com.alice.service.impl;
 
-import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.RandomUtil;
 import com.alice.dao.VisitorDao;
 import com.alice.entity.VisitorEntity;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
-import java.util.Random;
 
 @Service
 public class VisitorServiceImpl implements IVisitorService {
@@ -38,7 +36,7 @@ public class VisitorServiceImpl implements IVisitorService {
         visitorEntity.setPhoneNumber(address.get("tel").toString());
         visitorEntity.setVisitorStartTime(new Date());
         visitorEntity.setVisitorEndTime(new Date());
-        visitorEntity.setAge(RandomUtil.randomInt(1,100));
+        visitorEntity.setAge(RandomUtil.randomInt(1, 100));
         visitorDao.add(visitorEntity);
         return visitorEntity;
     }
@@ -54,7 +52,7 @@ public class VisitorServiceImpl implements IVisitorService {
     }
 
     @Override
-    public Collection<VisitorEntity> findByCondition(Map<String, String> condition) {
+    public Collection<VisitorEntity> findByCondition(VisitorEntity condition) {
         return visitorDao.findByCondition(condition);
     }
 }

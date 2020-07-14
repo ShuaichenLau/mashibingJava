@@ -12,7 +12,7 @@ public class VisitorEntity {
     private int id;  //int NOT NULL AUTO_INCREMENT COMMENT '主键',
     private String name;  //varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '名称',
     private String address;  //varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '地址',
-    private int age;  //int DEFAULT NULL COMMENT '年龄',
+    private Integer age;  //int DEFAULT NULL COMMENT '年龄',
     private String phoneNumber;  //varchar(11) DEFAULT NULL COMMENT '电话号码',
 
     private Date visitorStartTime;  //datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '访问开始时间',
@@ -58,11 +58,11 @@ public class VisitorEntity {
         this.address = address;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

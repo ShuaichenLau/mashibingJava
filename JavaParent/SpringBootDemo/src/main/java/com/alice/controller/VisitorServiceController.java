@@ -3,14 +3,20 @@ package com.alice.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.alice.entity.VisitorEntity;
 import com.alice.service.IVisitorService;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,7 +30,7 @@ public class VisitorServiceController {
 
     public Log log = LogFactory.getLog(this.getClass());
 
-    private JSONObject result = new JSONObject();
+    private static JSONObject result = new JSONObject();
 
     @Autowired
     private IVisitorService visitorService;
@@ -38,17 +44,32 @@ public class VisitorServiceController {
 
     @RequestMapping("/findByAllVisitor")
     public JSONObject findByAllVisitor() {
-        Collection<VisitorEntity> byAllVisitor = (ArrayList) visitorService.findByAllVisitor();
+        Collection<VisitorEntity> byAllVisitor = visitorService.findByAllVisitor();
         result.put("visitorList", byAllVisitor);
+        result.put("visitorCount", byAllVisitor.size());
+        result.put("size", byAllVisitor.size());
         return result;
     }
 
     @RequestMapping("/findByCondition")
-    public JSONObject findByCondition(Map<String,String> condition) {
-        Collection<VisitorEntity> byCondition = (ArrayList) visitorService.findByCondition(condition);
-        result.put("visitorList", byCondition);
+    public JSONObject findByCondition(VisitorEntity visitorCondition) {
+
+        Collection<VisitorEntity> byCondition = Lists.newArrayList();
+
+        try {
+            byCondition = visitorService.findByCondition(visitorCondition);
+            result.put("visitorList", byCondition);
+            result.put("msg", "查询成功");
+            result.put("Count", byCondition.size());
+        } catch (Exception e) {
+            result.put("visitorList", byCondition);
+            result.put("msg", "查询失败");
+            result.put("Count", byCondition.size());
+        }
+
         return result;
     }
+
 
     @RequestMapping("/deleteVisitor")
     public JSONObject delete(int id) {

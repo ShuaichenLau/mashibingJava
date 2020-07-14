@@ -17,7 +17,7 @@ public interface VisitorDao {
 
     Collection<VisitorEntity> findByAll();
 
-    Collection<VisitorEntity> findByCondition(Map<String, String> condtion);
+    Collection<VisitorEntity> findByCondition(VisitorEntity condtion);
 
     boolean deleteVisitor(int id);
 
