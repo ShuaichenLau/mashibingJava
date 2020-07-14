@@ -3,3 +3,28 @@ server:
 logging:
   level:
     root: info
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://192.168.220.201:3306/application_spring?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      initial-size: 1
+      min-idle: 5
+      max-active: 20
+      max-wait-millis: 60000
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 180000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-aliases-package: com.alice.entity
