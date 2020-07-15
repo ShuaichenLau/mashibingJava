@@ -1,8 +1,12 @@
 server:
   port: 19090
+
 logging:
   level:
     root: info
+
+app:
+  id: springboot-Application
 
 spring:
   datasource:
@@ -30,3 +34,10 @@ mybatis:
   type-aliases-package: com.alice.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+apollo:
+  meta: http://192.168.220.201:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
