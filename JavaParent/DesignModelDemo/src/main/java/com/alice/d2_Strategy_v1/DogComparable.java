@@ -1,4 +1,4 @@
-package com.alice.d2_Strategy_01;
+package com.alice.d2_Strategy_v1;
 
 import com.alice.d2_Strategy.Dog;
 
