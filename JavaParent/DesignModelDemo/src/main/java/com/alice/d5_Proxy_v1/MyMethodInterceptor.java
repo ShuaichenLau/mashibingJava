@@ -5,6 +5,11 @@ import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
 
+/**
+ * 定义一个AOP切面
+ * @author liusc
+ * 2020-7-16 22:28:10
+ */
 public class MyMethodInterceptor implements MethodInterceptor {
     @Override
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
