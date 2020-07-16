@@ -14,7 +14,6 @@ public class ProxyMain {
 
     public static void main(String[] args) {
         Tank tank = new Tank();
-
         Movable movable = (Movable) Proxy.newProxyInstance(tank.getClass().getClassLoader(),
                 new Class[]{Movable.class},
                 new PerformanceTimeHandler(tank));

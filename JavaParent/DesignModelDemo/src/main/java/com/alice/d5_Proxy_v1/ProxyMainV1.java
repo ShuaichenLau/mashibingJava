@@ -1,7 +1,5 @@
 package com.alice.d5_Proxy_v1;
 
-import com.alice.d5_Proxy.PerformanceTimeHandler;
-import com.alice.d5_Proxy.Tank;
 import net.sf.cglib.proxy.Enhancer;
 
 /**
@@ -10,10 +8,9 @@ import net.sf.cglib.proxy.Enhancer;
 public class ProxyMainV1 {
     public static void main(String[] args) {
         Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(Tank.class);
+        enhancer.setSuperclass(TankProxy.class);
         enhancer.setCallback(new MyMethodInterceptor());
-        Tank tank = (Tank) enhancer.create();
+        TankProxy tank = (TankProxy) enhancer.create();
         tank.move();
-
     }
 }

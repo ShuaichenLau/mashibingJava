@@ -11,6 +11,17 @@ public class MyMethodInterceptor implements MethodInterceptor {
 
         long startTime = System.currentTimeMillis();
         // 被代理的对象 tank
-        return methodProxy.invokeSuper(obj, args);
+        Object result = null;
+        result = methodProxy.invokeSuper(obj, args);
+
+        System.out.println("运行时间 " + (System.currentTimeMillis() - startTime) + " ms");
+        return result;
+
+//        System.out.println(obj.getClass().getSuperclass().getName());
+//        System.out.println("before");
+//        Object result = null;
+//        result = methodProxy.invokeSuper(obj, args);
+//        System.out.println("after");
+//        return result;
     }
 }
