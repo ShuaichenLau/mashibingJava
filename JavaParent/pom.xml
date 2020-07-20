@@ -20,6 +20,16 @@
         <version>2.1.15.RELEASE</version>
     </parent>
 
+    <dependencies>
+        <!--添加热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>true</scope>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
