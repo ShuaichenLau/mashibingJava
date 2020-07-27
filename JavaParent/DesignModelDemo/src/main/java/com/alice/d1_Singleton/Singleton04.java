@@ -26,6 +26,19 @@ public class Singleton04 {
     }
 
     public static void main(String[] args) {
+
+        try {
+            Class.forName("com.alice.d1_Singleton.Singleton04").newInstance();
+            Class<?> aClass = Class.forName("com.alice.d1_Singleton.Singleton04");
+            System.out.println(aClass.getClassLoader());
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         for (int i = 0; i < 50; i++) {
             new Thread(new Runnable() {
                 @Override
