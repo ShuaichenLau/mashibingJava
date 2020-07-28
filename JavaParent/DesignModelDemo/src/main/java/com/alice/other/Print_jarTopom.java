@@ -14,63 +14,69 @@ import java.util.jar.Manifest;
 
 /**
  * 传统项目转maven 生成pom 依赖jar
+ * 2020年7月28日18:08:07
  */
 public class Print_jarTopom {
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) {
         Element dependencys = new DOMElement("dependencys");
         File dir = new File("D:\\isoftstone\\dev_20200616\\branch_init\\rules_nvhl\\WebRoot\\WEB-INF\\lib"); //需生成pom.xml 文件的 lib路径
 
 //        D:\isoftstone\dev_20200616\branch_init\rules_nvhl\WebRoot\WEB-INF\lib
 
         //C:/Users/huanglei/Desktop/KinderGartenManage (1)/WebRoot/WEB-INF/lib
-        for (File jar : dir.listFiles()) {
-            JarInputStream jis = new JarInputStream(new FileInputStream(jar));
-            Manifest mainmanifest = jis.getManifest();
-            jis.close();
-            String bundleName = mainmanifest.getMainAttributes().getValue("Bundle-Name");
-            String bundleVersion = mainmanifest.getMainAttributes().getValue("Bundle-Version");
-            Element ele = null;
-            /* System.out.println(jar.getName());*/
-            StringBuffer sb = new StringBuffer(jar.getName());
-            if (bundleName != null) {
-                bundleName = bundleName.toLowerCase().replace(" ", "-");
-                sb.append(bundleName + "\t").append(bundleVersion);
-                ele = getDependices(bundleName, bundleVersion);
- /* System.out.println(sb.toString());
- System.out.println(ele.asXML());*/
-            }
-            if (ele == null || ele.elements().size() == 0) {
-                bundleName = "";
-                bundleVersion = "";
-                String[] ns = jar.getName().replace(".jar", "").split("-");
-                for (String s : ns) {
-                    if (Character.isDigit(s.charAt(0))) {
-                        bundleVersion += s + "-";
-                    } else {
-                        bundleName += s + "-";
+        try {
+            for (File jar : dir.listFiles()) {
+                JarInputStream jis = new JarInputStream(new FileInputStream(jar));
+                Manifest mainmanifest = jis.getManifest();
+                jis.close();
+                String bundleName = mainmanifest.getMainAttributes().getValue("Bundle-Name");
+                String bundleVersion = mainmanifest.getMainAttributes().getValue("Bundle-Version");
+                Element ele = null;
+                /* System.out.println(jar.getName());*/
+                StringBuffer sb = new StringBuffer(jar.getName());
+                if (bundleName != null) {
+                    bundleName = bundleName.toLowerCase().replace(" ", "-");
+                    sb.append(bundleName + "\t").append(bundleVersion);
+                    ele = getDependices(bundleName, bundleVersion);
+     /* System.out.println(sb.toString());
+     System.out.println(ele.asXML());*/
+                }
+                if (ele == null || ele.elements().size() == 0) {
+                    bundleName = "";
+                    bundleVersion = "";
+                    String[] ns = jar.getName().replace(".jar", "").split("-");
+                    for (String s : ns) {
+                        if (Character.isDigit(s.charAt(0))) {
+                            bundleVersion += s + "-";
+                        } else {
+                            bundleName += s + "-";
+                        }
                     }
-                }
-                if (bundleVersion.endsWith("-")) {
-                    bundleVersion = bundleVersion.substring(0, bundleVersion.length() - 1);
-                }
-                if (bundleName.endsWith("-")) {
-                    bundleName = bundleName.substring(0, bundleName.length() - 1);
+                    if (bundleVersion.endsWith("-")) {
+                        bundleVersion = bundleVersion.substring(0, bundleVersion.length() - 1);
+                    }
+                    if (bundleName.endsWith("-")) {
+                        bundleName = bundleName.substring(0, bundleName.length() - 1);
+                    }
+                    ele = getDependices(bundleName, bundleVersion);
+                    sb.setLength(0);
+                    sb.append(bundleName + "\t").append(bundleVersion);
+                    /* System.out.println(sb.toString());*/
+                    System.out.println(ele.asXML());
+                    /* savepomFile(dependencys.asXML()+"\r\n");*/
                 }
                 ele = getDependices(bundleName, bundleVersion);
-                sb.setLength(0);
-                sb.append(bundleName + "\t").append(bundleVersion);
-                /* System.out.println(sb.toString());*/
-                System.out.println(ele.asXML());
-                /* savepomFile(dependencys.asXML()+"\r\n");*/
+                if (ele.elements().size() == 0) {
+                    ele.add(new DOMElement("groupId").addText("not find"));
+                    ele.add(new DOMElement("artifactId").addText(bundleName));
+                    ele.add(new DOMElement("version").addText(bundleVersion));
+                }
+                dependencys.add(ele);
+                /* System.out.println();*/
             }
-            ele = getDependices(bundleName, bundleVersion);
-            if (ele.elements().size() == 0) {
-                ele.add(new DOMElement("groupId").addText("not find"));
-                ele.add(new DOMElement("artifactId").addText(bundleName));
-                ele.add(new DOMElement("version").addText(bundleVersion));
-            }
-            dependencys.add(ele);
-            /* System.out.println();*/
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         /* System.out.println(dependencys.asXML());*/
         savepomFile(dependencys.asXML());
