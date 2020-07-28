@@ -18,7 +18,7 @@ public class HelloWorldController {
     @RequestMapping("/")
     public String index(){
         log.info("com.alice.controller.HelloWorldController.index");
-        return "helloWorld docker  " + new Date().toString();
+        return "helloWorld docker  SpringBoot " + new Date().toString();
     }
 
     @RequestMapping("/info")
