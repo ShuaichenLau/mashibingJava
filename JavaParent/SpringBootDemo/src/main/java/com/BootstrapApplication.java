@@ -3,6 +3,7 @@ package com;
 import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author liusc
@@ -17,6 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * eg 营业厅场景  当进来一个客户时候  需要完成登记 落库 并且及时完成客户分发到员工接待
  *
  */
+@EnableAsync
 @SpringBootApplication
 @EnableApolloConfig
 public class BootstrapApplication {
