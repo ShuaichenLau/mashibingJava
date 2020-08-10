@@ -12,6 +12,7 @@
         <module>DesignModelDemo</module>
         <module>SpringBootDemo</module>
         <module>Docker-demo</module>
+        <module>RestFulDemo</module>
     </modules>
 
     <parent>
