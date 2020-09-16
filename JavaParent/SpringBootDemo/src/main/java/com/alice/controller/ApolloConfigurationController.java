@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * apollo 整合框架
@@ -33,6 +35,13 @@ public class ApolloConfigurationController {
         File file = new File(path);
         file.mkdirs();
         file.mkdir();
+
+        new Thread(() -> System.out.println("aaaaaaa")).start();
+
+
+        ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
+        System.out.println(JSON.toJSONString(propertyNames));
+
 
         log.info(JSON.toJSONString(propertyNames));
         return ConfigService.getAppConfig().getProperty(key, "undefined");
