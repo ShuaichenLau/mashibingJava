@@ -13,7 +13,13 @@ public class ThreadJDK8Demo {
         }
 
         long startTime = System.currentTimeMillis();
+        // 并行流
         strings.parallelStream().forEach(str -> {
+            System.out.println(str);
+        });
+
+        // 串行流
+        strings.stream().forEach(str->{
             System.out.println(str);
         });
 //        for (String string : strings) {
